@@ -54,7 +54,7 @@ public class AudioManager : MonoBehaviour
 	[SerializeField]
 	private float segmentLength = 1f;
 
-	void Sfx(string name)
+	public void Sfx(string name)
 	{
 		for (int i = 0; i < sfxEvents.Length; i++){
 			var sfxEvent = sfxEvents[i];
