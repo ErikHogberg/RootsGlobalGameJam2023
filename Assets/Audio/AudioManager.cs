@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
 	private float musicAmp;
 	[SerializeField]
 	private float segmentLength = 1f;
+	private bool musicPlaying = false;
 
 	public void Sfx(string name)
 	{
@@ -73,26 +74,40 @@ public class AudioManager : MonoBehaviour
 
 	public void StartMusic()
 	{
-		StartCoroutine("MusicNext", 0);
+		StartCoroutine("MusicLoop");
+		musicPlaying = true;
 	}
 
-    private IEnumerator MusicNext(float wait)
+	public void StopMusic()
+	{
+		musicPlaying = false;
+	}
+
+    private IEnumerator MusicLoop()
     {
-        yield return new WaitForSeconds(wait);
+		while (musicPlaying) {
+			yield return new WaitForSeconds(segmentLength);
 
-		List<MusicSegment> clips = new List<MusicSegment>();
-		float intensity = Mathf.FloorToInt(Mathf.Clamp(currentIntensity, minIntensity, maxIntensity));
-		MusicSegment nextSeg;
-		foreach (var clip in segments) {
-			if (clip.intensity == intensity) {
-				clips.Insert(0, clip);
+			List<MusicSegment> clips = new List<MusicSegment>();
+			float intensity = Mathf.FloorToInt(Mathf.Clamp(currentIntensity, minIntensity, maxIntensity));
+			MusicSegment nextSeg;
+			foreach (var clip in segments) {
+				if (clip.intensity == intensity) {
+					clips.Insert(0, clip);
+				}
 			}
-		}
-		int nextIndex = Random.Range(0, clips.Count);
-		nextSeg = clips[nextIndex];
+			int nextIndex = Random.Range(0, clips.Count);
+			
+			if (clips.Count == 0) {
+				// lil bit of error handling
+				Debug.LogWarning("There is no clip with the intensity: " + intensity.ToString());
+				yield return new WaitForSeconds(1f);
+				continue;
+			}
+			nextSeg = clips[nextIndex];
 
-		musicSource.PlayOneShot(nextSeg.clip);
-		MusicNext(segmentLength);
+			musicSource.PlayOneShot(nextSeg.clip);
+		}
  	}
 
 	void Awake() {
