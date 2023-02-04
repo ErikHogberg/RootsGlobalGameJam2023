@@ -21,8 +21,9 @@ public class LocalRbLocker : MonoBehaviour
     private void Start()
     {
 
-        if(!randomInit){
-            random = new Random();
+        if (!randomInit)
+        {
+            random = new Random((uint)System.DateTime.Now.Millisecond);
             randomInit = true;
         }
 
@@ -47,7 +48,8 @@ public class LocalRbLocker : MonoBehaviour
         localVelocity.z = -localPos.z * AdjustForceMul;
         Rb.velocity = ReferenceObject.TransformDirection(localVelocity);
 
-        if(Rb.velocity.sqrMagnitude <MinVelocity){
+        if (Rb.velocity.sqrMagnitude < MinVelocity)
+        {
             Vector3 localForce = random.NextFloat3(JostleForceMin, JostleForceMax);
             Vector3 worldForce = ReferenceObject.TransformDirection(localForce);
             Rb.AddForce(worldForce, ForceMode.Impulse);

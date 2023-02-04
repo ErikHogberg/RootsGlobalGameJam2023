@@ -67,9 +67,9 @@ public class AudioManager : MonoBehaviour
 		Debug.LogWarning(name + " does not exist as an sfx");
 	}
 
-	void UpdateMusic(float intensity) {
-		currentIntensity = Mathf.Lerp(currentIntensity, intensity, 0.01f);
-	}
+	public void UpdateMusic(float intensity) {
+        currentIntensity = intensity;//Mathf.Lerp(currentIntensity, intensity, 0.01f);
+    }
 
 	public void StartMusic()
 	{
@@ -81,7 +81,7 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(wait);
 
 		List<MusicSegment> clips = new List<MusicSegment>();
-		float intensity = Mathf.FloorToInt(Mathf.Clamp(currentIntensity, minIntensity, maxIntensity));
+		int intensity = Mathf.FloorToInt(Mathf.Clamp(currentIntensity, minIntensity, maxIntensity));
 		MusicSegment nextSeg;
 		foreach (var clip in segments) {
 			if (clip.intensity == intensity) {
