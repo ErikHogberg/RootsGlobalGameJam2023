@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +9,12 @@ public class BasketMover : MonoBehaviour
 
     [Space]
     public float ForceMul = 1f;
+    public float MaxForce = 1f;
+    public float MinForce = .1f;
+    public float RotSpeed = 1f;
+
+    float rotBuffer;
+    float rotTarget;
 
     private void Start()
     {
@@ -29,7 +33,9 @@ public class BasketMover : MonoBehaviour
     {
         // if(!Pointer.current.IsPressed()) return;
 
-        // TODO: project mouse pos on plane, move basket rb there
+        // TODO: set target rotation using cached previous positions
+        // TODO: rotate towards target rotation
+        // Rb.rotation =
 
         Plane plane = new Plane(
             GaemPlane.position + GaemPlane.up,
@@ -40,27 +46,23 @@ public class BasketMover : MonoBehaviour
                         // Pointer.current.position.ReadValue()
                         Mouse.current.position.ReadValue()
                     );
+                    
         if (plane.Raycast(
             ray, out float enter))
         {
 
-            Vector3 basketPos = ray.GetPoint(enter);
-            // Plane.TransformPoint(
-            // Vector3.ProjectOnPlane(
-            // Plane.InverseTransformPoint(
+            Vector3 basketWorldPos = ray.GetPoint(enter);
+            
+            Vector3 force = (basketWorldPos - Rb.position) * ForceMul;
+            float magnitude = force.magnitude;
 
-            // ),
-            // Vector3.forward
-            // )
-            // )
-            ;
-            Rb.MovePosition(basketPos);
-            Debug.Log($"New basket pos {basketPos.ToString("0.00")}");
+            if (magnitude < float.Epsilon)
+                return;
+
+            force = force.normalized * Mathf.Clamp(magnitude, MinForce, MaxForce);
+            // Debug.Log($"Adding basket force {force.ToString("0.00")}");
+            Rb.AddForceAtPosition(force, basketWorldPos, ForceMode.Force);
         }
 
-        // transform.position = basketPos;
-        // Vector3 force = (Rb.position - basketPos) * ForceMul;
-        // Debug.Log($"Adding basket force {force.ToString("0.00")}");
-        // Rb.AddForce(force, ForceMode.Force);
     }
 }
