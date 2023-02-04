@@ -38,6 +38,7 @@ public class MusicSegment
 
 public class AudioManager : MonoBehaviour
 {
+	[HideInInspector]
 	public AudioManager singleton;
 
 	[SerializeField] 
