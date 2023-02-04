@@ -44,9 +44,13 @@ public class AudioManager : MonoBehaviour
 	[SerializeField] 
 	private SfxEvent[] sfxEvents;
 	
+
 	[SerializeField]
-	private MusicSegment[] segments;
+	private AudioClip musicClip;
+	[SerializeField]
+	private MusicSegment[] segments; //unused
 	private AudioSource musicSource;
+	[SerializeField]
 	private float currentIntensity = 0;
 	private float minIntensity = 1000; // stupid numbers, but it's for comparisons down the line
 	private float maxIntensity = -1000;
@@ -54,7 +58,6 @@ public class AudioManager : MonoBehaviour
 	private float musicAmp;
 	[SerializeField]
 	private float segmentLength = 1f;
-	private bool musicPlaying = false;
 
 	public void Sfx(string name)
 	{
@@ -69,47 +72,20 @@ public class AudioManager : MonoBehaviour
 		Debug.LogWarning(name + " does not exist as an sfx");
 	}
 
-	void UpdateMusic(float intensity) {
-		currentIntensity = Mathf.Lerp(currentIntensity, intensity, 0.01f);
+	public void UpdateMusic(float intensity) {
+		currentIntensity = intensity; // Mathf.Lerp(currentIntensity, intensity, 0.01f);
 	}
 
 	public void StartMusic()
 	{
-		StartCoroutine("MusicLoop");
-		musicPlaying = true;
+		musicSource.Play();
 	}
 
 	public void StopMusic()
 	{
-		musicPlaying = false;
+		musicSource.Stop();
 	}
 
-    private IEnumerator MusicLoop()
-    {
-		while (musicPlaying) {
-			yield return new WaitForSeconds(segmentLength);
-
-			List<MusicSegment> clips = new List<MusicSegment>();
-			float intensity = Mathf.FloorToInt(Mathf.Clamp(currentIntensity, minIntensity, maxIntensity));
-			MusicSegment nextSeg;
-			foreach (var clip in segments) {
-				if (clip.intensity == intensity) {
-					clips.Insert(0, clip);
-				}
-			}
-			int nextIndex = Random.Range(0, clips.Count);
-			
-			if (clips.Count == 0) {
-				// lil bit of error handling
-				Debug.LogWarning("There is no clip with the intensity: " + intensity.ToString());
-				yield return new WaitForSeconds(1f);
-				continue;
-			}
-			nextSeg = clips[nextIndex];
-
-			musicSource.PlayOneShot(nextSeg.clip);
-		}
- 	}
 
 	void Awake() {
 		if (singleton == null) {
@@ -125,7 +101,9 @@ public class AudioManager : MonoBehaviour
 		}
 
 		musicSource = gameObject.AddComponent<AudioSource>();
+		musicSource.loop = true;
 		musicSource.volume = musicAmp;
+		musicSource.clip = musicClip;
 		foreach (var seg in segments) {
 			if (seg.intensity < minIntensity) {
 				minIntensity = seg.intensity; 
@@ -134,5 +112,13 @@ public class AudioManager : MonoBehaviour
 				maxIntensity = seg.intensity;
 			}
 		}
+	}
+
+	void Start() {
+		StartMusic();
+	}
+
+	void Update() {
+
 	}
 }

@@ -52,6 +52,7 @@ MonoBehaviour:
       amp: 0
     source: {fileID: 0}
     amp: 0
+  musicClip: {fileID: 8300000, guid: c0e690d9efe36f5a39eb857960f263e6, type: 3}
   segments:
   - intensity: 0
     clip: {fileID: 8300000, guid: 430ca35a6016b3dde8593fc8806600a0, type: 3}
@@ -69,5 +70,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d571ef22c42078960acce951c0e3818a, type: 3}
   - intensity: 3
     clip: {fileID: 8300000, guid: 36394971d170fb4b2b5ac36a757fe8f3, type: 3}
+  currentIntensity: 0
   musicAmp: 1
   segmentLength: 13.42
