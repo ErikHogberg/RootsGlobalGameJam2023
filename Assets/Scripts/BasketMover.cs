@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,9 +13,13 @@ public class BasketMover : MonoBehaviour
     public float MaxForce = 1f;
     public float MinForce = .1f;
     public float RotSpeed = 1f;
+    public float DirThreshold = .1f;
 
     float rotBuffer;
     float rotTarget;
+
+    Utils.FixedVectorQueue posCache;
+    public int PosCacheSize = 5;
 
     private void Start()
     {
@@ -27,15 +32,23 @@ public class BasketMover : MonoBehaviour
         }
 
         if (!GaemPlane) GaemPlane = transform.parent;
+
+        posCache = new(PosCacheSize);
     }
 
     private void FixedUpdate()
     {
-        // if(!Pointer.current.IsPressed()) return;
 
-        // TODO: set target rotation using cached previous positions
-        // TODO: rotate towards target rotation
-        // Rb.rotation =
+
+        posCache.Enqueue(Rb.position);
+        Vector3 dir = posCache.First - posCache.Last;
+        if (dir.magnitude > DirThreshold)
+        {
+            rotTarget = Vector3.SignedAngle(GaemPlane.up, dir, GaemPlane.forward);
+            rotBuffer = Mathf.MoveTowardsAngle(rotBuffer, rotTarget, RotSpeed * Time.deltaTime);
+
+            Rb.rotation = Quaternion.AngleAxis(rotBuffer, GaemPlane.forward);
+        }
 
         Plane plane = new Plane(
             GaemPlane.position + GaemPlane.up,
@@ -46,13 +59,13 @@ public class BasketMover : MonoBehaviour
                         // Pointer.current.position.ReadValue()
                         Mouse.current.position.ReadValue()
                     );
-                    
+
         if (plane.Raycast(
             ray, out float enter))
         {
 
             Vector3 basketWorldPos = ray.GetPoint(enter);
-            
+
             Vector3 force = (basketWorldPos - Rb.position) * ForceMul;
             float magnitude = force.magnitude;
 
@@ -65,4 +78,6 @@ public class BasketMover : MonoBehaviour
         }
 
     }
+
+
 }
