@@ -6,7 +6,7 @@ using UnityEngine;
 public class AdjustableClip
 {
 	public AudioClip clip;
-	public float amp = 0;
+	public float amp = 1f;
 }
 
 [System.Serializable]
@@ -16,7 +16,7 @@ public class SfxEvent
 	public AdjustableClip[] clips;
 	[HideInInspector]
 	public AudioSource source;
-	public float amp = 1;
+	public float amp = 1f;
 
 	public void Setup(GameObject gameObject) {
 		source = gameObject.AddComponent<AudioSource>();
@@ -39,7 +39,7 @@ public class MusicSegment
 public class AudioManager : MonoBehaviour
 {
 	[HideInInspector]
-	public AudioManager singleton;
+	public static AudioManager singleton;
 
 	[SerializeField] 
 	private SfxEvent[] sfxEvents;
@@ -59,10 +59,10 @@ public class AudioManager : MonoBehaviour
 	// [SerializeField]
 	// private float segmentLength = 1f;
 
-	public void Sfx(string name)
+	public static void Sfx(string name)
 	{
-		for (int i = 0; i < sfxEvents.Length; i++){
-			var sfxEvent = sfxEvents[i];
+		for (int i = 0; i < singleton.sfxEvents.Length; i++){
+			var sfxEvent = singleton.sfxEvents[i];
 			if ( name == sfxEvent.name) {
 				sfxEvent.Emit();
 				return;

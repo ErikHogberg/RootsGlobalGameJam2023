@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +10,7 @@ public class StakeScript : MonoBehaviour
     {
         public string Type;
         public List<string> Cookednesses;
+        public string OneCookedness => Cookednesses == null || Cookednesses.Count < 1 ? string.Empty : Cookednesses[0];
     }
 
     public float VeggieSpacing = .1f;
@@ -23,12 +24,19 @@ public class StakeScript : MonoBehaviour
 
     [Space]
     public UnityEvent<StakeScript> OnOn;
+    public UnityEvent<Beet> OnVeggie;
+
+    public UrderUIHandler OrderHandler;
+    public OrderUI OrderRef;
 
     private void Start()
     {
         if (!VeggiePlacer) VeggiePlacer = transform;
         timer = OffTime;
         Veggies = new(Order.Count);
+
+        // OrderHandler.AddOrder(this);
+
     }
 
     private void Update()
@@ -53,12 +61,15 @@ public class StakeScript : MonoBehaviour
 
         if (other.gameObject.TryGetComponent<Beet>(out var beet))
         {
+            AudioManager.Sfx("stake");
             beet.Stake();
             Veggies.Add(beet);
+            OnVeggie.Invoke(beet);
             Debug.Log("stake got veggie");
             RepositionVeggies();
-            if(Veggies.Count >= Order.Count){
-                // TODO: finish order
+            if (Veggies.Count >= Order.Count)
+            {
+                Finish();
             }
         }
     }
@@ -69,5 +80,17 @@ public class StakeScript : MonoBehaviour
         {
             Veggies[i].transform.position = VeggiePlacer.position + VeggiePlacer.forward * VeggieSpacing * i;
         }
+    }
+
+    public void Finish(){
+        // TODO: award score
+        
+        foreach (var item in Veggies)
+        {
+            Destroy(item.gameObject);
+        }
+        Veggies.Clear();
+        OrderRef.Finish();
+        Destroy(gameObject);
     }
 }
