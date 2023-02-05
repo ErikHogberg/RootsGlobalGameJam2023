@@ -90,7 +90,6 @@ public class StakeScript : MonoBehaviour
 
     public void Finish()
     {
-        // TODO: award score
         int scoreAcc = 0;
 
         foreach (var item in Order)
@@ -122,6 +121,7 @@ public class StakeScript : MonoBehaviour
         }
 
         ScoreManager.Score += scoreAcc;
+        Debug.Log($"added score {scoreAcc}");
 
         foreach (var item in Veggies)
         {

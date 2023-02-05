@@ -12,9 +12,19 @@ public class Beet : MonoBehaviour
     public List<string> Cookednesses;
     public string OneCookedness => Cookednesses == null || Cookednesses.Count < 1 ? string.Empty : Cookednesses[0];
 
+    public List<IngredientUI.VeggieEntry> CookStates;
+
     public void Stake()
     {
         OnStake.Invoke();
+    }
+
+    public void Cook(string how)
+    {
+        foreach (var item in CookStates)
+        {
+            item.Value.SetActive(item.Key == how);
+        }
     }
 
 }
