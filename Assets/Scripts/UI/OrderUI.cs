@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,6 +6,7 @@ public class OrderUI : MonoBehaviour
 {
     public UrderUIHandler ParentHandler;
     public IngredientUI[] Ingredients;
+    public TMP_Text SpotNumber;
 
     public float Timer = 60;
     float timer = 1;
@@ -37,6 +39,7 @@ public class OrderUI : MonoBehaviour
 
     public void SetOrder(StakeScript stake)
     {
+        SpotNumber.SetText(stake.Spot.ToString());
         stakeRef = stake;
         gameObject.SetActive(true);
         timer = Timer;
