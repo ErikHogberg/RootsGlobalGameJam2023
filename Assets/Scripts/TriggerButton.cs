@@ -10,19 +10,19 @@ public class TriggerButton : MonoBehaviour
 
     public UnityEvent OnPress;
 
-    float timer = -1;
+    static float sharedTimer = -1;
 
     private void Update() {
-        if(timer < 0) return;
+        if(sharedTimer < 0) return;
 
-        timer -= Time.deltaTime;
+        sharedTimer -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(timer > 0) return;
+        if(sharedTimer > 0) return;
 
         OnPress.Invoke();
         Debug.Log($"Press {gameObject.name}");
-        timer = NextPressDelay;
+        sharedTimer = NextPressDelay;
     }
 }
