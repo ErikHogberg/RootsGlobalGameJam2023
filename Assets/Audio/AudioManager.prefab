@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e47c776857cc450ea7ed591c9b3f5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  singleton: {fileID: 0}
   sfxEvents:
   - name: beet-new
     clips:
@@ -106,6 +105,12 @@ MonoBehaviour:
       amp: 1
     source: {fileID: 0}
     amp: 1
+  - name: stake
+    clips:
+    - clip: {fileID: 8300000, guid: 82981df3b689123e4a8cb0a28025fa4e, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
   musicClip: {fileID: 8300000, guid: c0e690d9efe36f5a39eb857960f263e6, type: 3}
   segments:
   - intensity: 0
@@ -125,4 +130,4 @@ MonoBehaviour:
   - intensity: 3
     clip: {fileID: 8300000, guid: 36394971d170fb4b2b5ac36a757fe8f3, type: 3}
   currentIntensity: 0
-  musicAmp: 1
+  musicAmp: 0.4

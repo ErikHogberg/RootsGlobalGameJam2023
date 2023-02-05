@@ -27,6 +27,7 @@ public class BeetShooter : MonoBehaviour
     }
 
     public void Shoot(){
+        AudioManager.Sfx("beet-new");
         float lerp = random.NextFloat(0, 1);
 
 

@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -55,6 +55,7 @@ public class StakeScript : MonoBehaviour
 
         if (other.gameObject.TryGetComponent<Beet>(out var beet))
         {
+            AudioManager.Sfx("stake");
             beet.Stake();
             Veggies.Add(beet);
             OnVeggie.Invoke(beet);
