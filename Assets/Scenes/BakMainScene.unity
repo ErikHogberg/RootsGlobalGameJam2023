@@ -2121,10 +2121,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: GGJ_Truck_Spike
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 01268514ec304e54599f10d61d62fd8c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01268514ec304e54599f10d61d62fd8c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1180333457}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01268514ec304e54599f10d61d62fd8c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1180333458}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01268514ec304e54599f10d61d62fd8c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1180333459}
   m_SourcePrefab: {fileID: 100100000, guid: 01268514ec304e54599f10d61d62fd8c, type: 3}
 --- !u!4 &1053832389 stripped
 Transform:
@@ -2132,6 +2149,79 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1053832388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1180333454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01268514ec304e54599f10d61d62fd8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1053832388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1180333457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180333454}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0069089914, y: 0.0010000004, z: 0.010715468}
+  m_Center: {x: 0.0030214814, y: -9.386826e-10, z: -0.002807734}
+--- !u!114 &1180333458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180333454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288a90f1452402f4ea9b598621809c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VeggieSpacing: 0.1
+  Order: []
+  VeggiePlacer: {fileID: 1460041796}
+  OffTime: 1
+  OnOn:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!54 &1180333459
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180333454}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &1184309347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,6 +2731,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446602011}
   m_Mesh: {fileID: 1244776425715413010, guid: f4242d9844a267247a80e7a0ee79607c, type: 3}
+--- !u!1 &1460041795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1460041796}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1460041796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460041795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2064128631}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552564822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,6 +2776,7 @@ GameObject:
   - component: {fileID: 1552564826}
   - component: {fileID: 1552564825}
   - component: {fileID: 1552564824}
+  - component: {fileID: 1552564829}
   m_Layer: 6
   m_Name: beetroot
   m_TagString: Beet
@@ -2798,6 +2920,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552564822}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1552564829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552564822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc364dbe6c1e1e4dae4595cd4baac53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1552564826}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+        m_MethodName: set_isKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1552564825}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1552564824}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Type: beet
+  Cookednesses: []
 --- !u!1 &1573241273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,6 +3865,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1053832389}
+  - {fileID: 1460041796}
   m_Father: {fileID: 1989935830}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
