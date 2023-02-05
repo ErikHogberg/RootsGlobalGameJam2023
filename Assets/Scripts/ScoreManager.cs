@@ -8,7 +8,6 @@ public class ScoreManager : MonoBehaviour
     public static int Score;
     public TextMeshProUGUI ScoreText;
 
-
     public void IncreaseScore()
     {
         Score = Score + 1;
