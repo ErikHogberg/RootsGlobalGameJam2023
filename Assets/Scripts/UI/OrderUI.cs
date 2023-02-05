@@ -1,10 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OrderUI : MonoBehaviour
 {
     public IngredientUI[] Ingredients;
+    
+    [Space]
+    public RectTransform Banner;
+    public float BannerSpacing = 1f;
+    public float BannerOffset = 1f;
 
     public void SetOrder(StakeScript stake)
     {
