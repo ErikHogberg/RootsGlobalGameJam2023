@@ -1,5 +1,6 @@
  using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -84,7 +85,35 @@ public class StakeScript : MonoBehaviour
 
     public void Finish(){
         // TODO: award score
-        
+        int scoreAcc = 0;
+
+        foreach (var item in Order)
+        {
+            if(Veggies.Count < 1) break;
+
+            int best = 0;
+            int bestScore = 0;
+            for (int i = 0; i < Veggies.Count; i++)
+            {
+                int score = 0;
+                if(Veggies[i].Type == item.Type){
+                    score++;
+                }
+                if(Veggies[i].OneCookedness == item.OneCookedness){
+                    score++;
+                }
+                if(score > bestScore){
+                    bestScore = score;
+                    best = i;
+                }
+            }
+            Destroy(Veggies[best].gameObject);
+            Veggies.RemoveAt(best);
+            scoreAcc += bestScore;
+        }
+
+        ScoreManager.Score += scoreAcc;
+
         foreach (var item in Veggies)
         {
             Destroy(item.gameObject);

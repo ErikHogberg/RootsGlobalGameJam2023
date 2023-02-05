@@ -10,8 +10,10 @@ public class Beet : MonoBehaviour
 
     public string Type;
     public List<string> Cookednesses;
+    public string OneCookedness => Cookednesses == null || Cookednesses.Count < 1 ? string.Empty : Cookednesses[0];
 
-    public void Stake(){
+    public void Stake()
+    {
         OnStake.Invoke();
     }
 
