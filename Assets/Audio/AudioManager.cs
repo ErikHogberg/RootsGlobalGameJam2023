@@ -56,8 +56,8 @@ public class AudioManager : MonoBehaviour
 	private float maxIntensity = -1000;
 	[SerializeField]
 	private float musicAmp;
-	[SerializeField]
-	private float segmentLength = 1f;
+	// [SerializeField]
+	// private float segmentLength = 1f;
 
 	public void Sfx(string name)
 	{
