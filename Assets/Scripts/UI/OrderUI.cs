@@ -32,7 +32,7 @@ public class OrderUI : MonoBehaviour
     public void Finish()
     {
         // ParentHandler.RemoveOrder(this);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     public void SetOrder(StakeScript stake)
