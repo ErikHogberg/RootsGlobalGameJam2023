@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-1777444899493745516
 MonoBehaviour:
@@ -46,12 +46,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singleton: {fileID: 0}
   sfxEvents:
-  - name: test
+  - name: beet-new
     clips:
-    - clip: {fileID: 0}
-      amp: 0
+    - clip: {fileID: 8300000, guid: 508dbf22b9b0335c1bb17da18e7b8d7f, type: 3}
+      amp: 1
     source: {fileID: 0}
-    amp: 0
+    amp: 1
+  - name: order-new
+    clips:
+    - clip: {fileID: 8300000, guid: 39d16171ea86c9a1ea8d4a0227262f3a, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: order-timeup
+    clips:
+    - clip: {fileID: 8300000, guid: a190fa40938cf8dfe8c1aebf3301b3bc, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: order-complete
+    clips:
+    - clip: {fileID: 8300000, guid: 69f576dff2886c932a1af0743e37a40d, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: pan-start
+    clips:
+    - clip: {fileID: 8300000, guid: 3ba294a3f9585816ba92f4aa50e8c7b3, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: pan-complete
+    clips:
+    - clip: {fileID: 8300000, guid: 79730a7ba5fede435a98a4f9738a3ec8, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: fry-start
+    clips:
+    - clip: {fileID: 8300000, guid: eb2c53e78bd68078ca9fe7988a8479d2, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: fry-complete
+    clips:
+    - clip: {fileID: 8300000, guid: eb2c53e78bd68078ca9fe7988a8479d2, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: boil-start
+    clips:
+    - clip: {fileID: 8300000, guid: bc088263472e3ce0a9b19f0dace2c709, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
+  - name: boil-complete
+    clips:
+    - clip: {fileID: 8300000, guid: 6e26f1b0dcfdd265aac4584f5a2c0d6c, type: 3}
+      amp: 1
+    source: {fileID: 0}
+    amp: 1
   musicClip: {fileID: 8300000, guid: c0e690d9efe36f5a39eb857960f263e6, type: 3}
   segments:
   - intensity: 0
@@ -72,4 +126,3 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 36394971d170fb4b2b5ac36a757fe8f3, type: 3}
   currentIntensity: 0
   musicAmp: 1
-  segmentLength: 13.42
