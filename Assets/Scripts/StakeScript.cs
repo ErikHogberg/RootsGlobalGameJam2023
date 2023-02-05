@@ -10,6 +10,7 @@ public class StakeScript : MonoBehaviour
     {
         public string Type;
         public List<string> Cookednesses;
+        public string OneCookedness => Cookednesses == null || Cookednesses.Count < 1 ? string.Empty : Cookednesses[0];
     }
 
     public float VeggieSpacing = .1f;
@@ -23,6 +24,7 @@ public class StakeScript : MonoBehaviour
 
     [Space]
     public UnityEvent<StakeScript> OnOn;
+    public UnityEvent<Beet> OnVeggie;
 
     private void Start()
     {
@@ -55,9 +57,11 @@ public class StakeScript : MonoBehaviour
         {
             beet.Stake();
             Veggies.Add(beet);
+            OnVeggie.Invoke(beet);
             Debug.Log("stake got veggie");
             RepositionVeggies();
-            if(Veggies.Count >= Order.Count){
+            if (Veggies.Count >= Order.Count)
+            {
                 // TODO: finish order
             }
         }
