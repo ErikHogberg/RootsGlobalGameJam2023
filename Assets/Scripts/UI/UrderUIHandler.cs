@@ -11,6 +11,16 @@ public class UrderUIHandler : MonoBehaviour
     public void AddOrder(StakeScript stake)
     {
         var order = Instantiate(OrderPrefab, OrderParent);
+        order.SetOrder(stake);
+        stake.OrderRef = order;
+    }
+
+    public void RemoveOrder(OrderUI order){
+        
+    }
+
+    public void RemoveOrder(StakeScript stake){
+        
     }
 
 }

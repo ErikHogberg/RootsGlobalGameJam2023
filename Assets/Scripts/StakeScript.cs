@@ -26,11 +26,17 @@ public class StakeScript : MonoBehaviour
     public UnityEvent<StakeScript> OnOn;
     public UnityEvent<Beet> OnVeggie;
 
+    public UrderUIHandler OrderHandler;
+    public OrderUI OrderRef;
+
     private void Start()
     {
         if (!VeggiePlacer) VeggiePlacer = transform;
         timer = OffTime;
         Veggies = new(Order.Count);
+
+        // OrderHandler.AddOrder(this);
+
     }
 
     private void Update()
@@ -63,7 +69,7 @@ public class StakeScript : MonoBehaviour
             RepositionVeggies();
             if (Veggies.Count >= Order.Count)
             {
-                // TODO: finish order
+                Finish();
             }
         }
     }
@@ -74,5 +80,17 @@ public class StakeScript : MonoBehaviour
         {
             Veggies[i].transform.position = VeggiePlacer.position + VeggiePlacer.forward * VeggieSpacing * i;
         }
+    }
+
+    public void Finish(){
+        // TODO: award score
+        
+        foreach (var item in Veggies)
+        {
+            Destroy(item.gameObject);
+        }
+        Veggies.Clear();
+        OrderRef.Finish();
+        Destroy(gameObject);
     }
 }

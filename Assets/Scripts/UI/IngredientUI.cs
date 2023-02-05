@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IngredientUI : MonoBehaviour
@@ -16,7 +17,7 @@ public class IngredientUI : MonoBehaviour
 
     public void Set(string veggie, string req)
     {
-        gameObject.SetActive(true);
+        // gameObject.SetActive(true);
         foreach (var item in Veggies)
         {
             item.Value.SetActive(item.Key == veggie);
@@ -27,7 +28,12 @@ public class IngredientUI : MonoBehaviour
         }
     }
 
-    public void Hide(){
-        gameObject.SetActive(false);
+    public void Hide()
+    {
+        foreach (var item in Veggies.Concat(Reqs))
+        {
+            item.Value.SetActive(false);
+        }
+        // gameObject.SetActive(false);
     }
 }
