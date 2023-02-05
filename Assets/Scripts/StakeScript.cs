@@ -14,7 +14,7 @@ public class StakeScript : MonoBehaviour
 
     public float VeggieSpacing = .1f;
     public List<OrderEntry> Order;
-    private List<Beet> Veggies = new(5);
+    private List<Beet> Veggies;
     public Transform VeggiePlacer;
 
     [Space]
@@ -22,12 +22,13 @@ public class StakeScript : MonoBehaviour
     float timer = 1;
 
     [Space]
-    public UnityEvent OnOn;
+    public UnityEvent<StakeScript> OnOn;
 
     private void Start()
     {
         if (!VeggiePlacer) VeggiePlacer = transform;
         timer = OffTime;
+        Veggies = new(Order.Count);
     }
 
     private void Update()
@@ -38,14 +39,14 @@ public class StakeScript : MonoBehaviour
             if (OffTime < 0)
             {
                 Debug.Log("stake on");
-                OnOn.Invoke();
+                OnOn.Invoke(this);
             }
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (OffTime > 0)
+        if (OffTime > 0 || Veggies.Count >= Order.Count)
         {
             return;
         }
@@ -56,6 +57,9 @@ public class StakeScript : MonoBehaviour
             Veggies.Add(beet);
             Debug.Log("stake got veggie");
             RepositionVeggies();
+            if(Veggies.Count >= Order.Count){
+                // TODO: finish order
+            }
         }
     }
 
