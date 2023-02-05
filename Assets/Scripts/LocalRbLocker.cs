@@ -15,8 +15,10 @@ public class LocalRbLocker : MonoBehaviour
     public float Limit = 1f;
     public float AdjustForceMul = 1f;
     public float MinVelocity = .01f;
-    public float JostleForceMin = .2f;
-    public float JostleForceMax = .2f;
+    public float VelocityLimit = 20f;
+    public bool Jostle = false;
+    public float JostleForceMin = 2f;
+    public float JostleForceMax = 5f;
 
     private void Start()
     {
@@ -48,11 +50,16 @@ public class LocalRbLocker : MonoBehaviour
         localVelocity.z = -localPos.z * AdjustForceMul;
         Rb.velocity = ReferenceObject.TransformDirection(localVelocity);
 
-        if (Rb.velocity.sqrMagnitude < MinVelocity)
+        if (Jostle && Rb.velocity.sqrMagnitude < MinVelocity)
         {
             Vector3 localForce = random.NextFloat3(JostleForceMin, JostleForceMax);
             Vector3 worldForce = ReferenceObject.TransformDirection(localForce);
             Rb.AddForce(worldForce, ForceMode.Impulse);
+        }
+
+        if (Rb.velocity.magnitude > VelocityLimit)
+        {
+            Rb.velocity = Rb.velocity.normalized * VelocityLimit;
         }
     }
 
