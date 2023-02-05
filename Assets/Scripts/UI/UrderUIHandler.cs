@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class UrderUIHandler : MonoBehaviour
 {
+
+    private static UrderUIHandler mainInstance = null;
+    void Awake()
+    {
+        mainInstance = this;
+    }
+    void OnDestroy()
+    {
+        mainInstance = null;
+    }
+
+
     public OrderUI OrderPrefab;
 
     public Transform OrderParent;
 
-    public void AddOrder(StakeScript stake)
+    public static void AddOrder(StakeScript stake)
+    {
+        if(mainInstance) mainInstance.AddOrderInternal(stake);
+    }
+    private void AddOrderInternal(StakeScript stake)
     {
         var order = Instantiate(OrderPrefab, OrderParent);
         order.SetOrder(stake);
         stake.OrderRef = order;
     }
 
-    public void RemoveOrder(OrderUI order){
-        
-    }
-
-    public void RemoveOrder(StakeScript stake){
-        
-    }
 
 }

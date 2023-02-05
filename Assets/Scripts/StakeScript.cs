@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,6 +18,8 @@ public class StakeScript : MonoBehaviour
     public List<OrderEntry> Order;
     private List<Beet> Veggies;
     public Transform VeggiePlacer;
+    public GameObject TopMost;
+    public StakeRef Ref;
 
     [Space]
     public float OffTime = 1f;
@@ -27,8 +29,9 @@ public class StakeScript : MonoBehaviour
     public UnityEvent<StakeScript> OnOn;
     public UnityEvent<Beet> OnVeggie;
 
-    public UrderUIHandler OrderHandler;
     public OrderUI OrderRef;
+
+    public int Spot = 0;
 
     private void Start()
     {
@@ -49,6 +52,8 @@ public class StakeScript : MonoBehaviour
             {
                 Debug.Log("stake on");
                 OnOn.Invoke(this);
+                UrderUIHandler.AddOrder(this);
+
             }
         }
     }
@@ -83,26 +88,30 @@ public class StakeScript : MonoBehaviour
         }
     }
 
-    public void Finish(){
+    public void Finish()
+    {
         // TODO: award score
         int scoreAcc = 0;
 
         foreach (var item in Order)
         {
-            if(Veggies.Count < 1) break;
+            if (Veggies.Count < 1) break;
 
             int best = 0;
             int bestScore = 0;
             for (int i = 0; i < Veggies.Count; i++)
             {
                 int score = 0;
-                if(Veggies[i].Type == item.Type){
+                if (Veggies[i].Type == item.Type)
+                {
                     score++;
                 }
-                if(Veggies[i].OneCookedness == item.OneCookedness){
+                if (Veggies[i].OneCookedness == item.OneCookedness)
+                {
                     score++;
                 }
-                if(score > bestScore){
+                if (score > bestScore)
+                {
                     bestScore = score;
                     best = i;
                 }
@@ -120,6 +129,7 @@ public class StakeScript : MonoBehaviour
         }
         Veggies.Clear();
         OrderRef.Finish();
-        Destroy(gameObject);
+        StakeSpawner.MainInstance.Remove(Ref);
+        Destroy(TopMost);
     }
 }
