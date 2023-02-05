@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -10,10 +10,14 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 10;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
+    public UnityEvent<float> OnTick;
+    float cachedTime = 100;
+
     private void Start()
     {
         // Starts the timer automatically
         timerIsRunning = true;
+        cachedTime = timeRemaining;
     }
     void Update()
     {
@@ -23,6 +27,7 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
+                OnTick.Invoke(timeRemaining/cachedTime);
             }
             else
             {

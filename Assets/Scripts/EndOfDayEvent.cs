@@ -58,9 +58,9 @@ public class EndOfDayEvent : MonoBehaviour
     }
     public void SetText()
     {
-        DayText.text = "Day " + DayManager.Day + " completed";
+        // DayText.text = "Day " + DayManager.Day + " completed";
 
-        OrderText.text = ScoreManager.Score + " orders out of " + MaxScore;
+        OrderText.text = ScoreManager.Score.ToString();// + " orders out of " + MaxScore;
     }
 
 }
